@@ -4,20 +4,6 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/*
- * Design system definition.
- *
- * The @theme inline block maps CSS custom properties to Tailwind utility
- * classes (e.g. --color-primary -> bg-primary, text-primary).
- *
- * The :root and .dark blocks define the actual color values using oklch.
- * All colors MUST use oklch format.
- *
- * To add a new semantic color:
- * 1. Add the variable to :root (light value) and .dark (dark value)
- * 2. Register it in @theme inline as --color-<name>: var(--<name>)
- */
-
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -59,86 +45,112 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+
+  --color-grid: var(--grid);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warn: var(--warn);
+  --color-warn-foreground: var(--warn-foreground);
+  --color-danger: var(--danger);
+  --color-danger-foreground: var(--danger-foreground);
+
+  --font-mono: ui-monospace, SFMono-Regular, "JetBrains Mono", "SF Mono", Menlo,
+    Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.129 0.042 264.695);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.129 0.042 264.695);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.129 0.042 264.695);
-  --primary: oklch(0.208 0.042 265.755);
-  --primary-foreground: oklch(0.984 0.003 247.858);
-  --secondary: oklch(0.968 0.007 247.896);
-  --secondary-foreground: oklch(0.208 0.042 265.755);
-  --muted: oklch(0.968 0.007 247.896);
-  --muted-foreground: oklch(0.554 0.046 257.417);
-  --accent: oklch(0.968 0.007 247.896);
-  --accent-foreground: oklch(0.208 0.042 265.755);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(0.929 0.013 255.508);
-  --input: oklch(0.929 0.013 255.508);
-  --ring: oklch(0.704 0.04 256.788);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.984 0.003 247.858);
-  --sidebar-foreground: oklch(0.129 0.042 264.695);
-  --sidebar-primary: oklch(0.208 0.042 265.755);
-  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-accent: oklch(0.968 0.007 247.896);
-  --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
-  --sidebar-border: oklch(0.929 0.013 255.508);
-  --sidebar-ring: oklch(0.704 0.04 256.788);
+
+  /* Mission control dark — applied at root so the whole app is dark */
+  --background: oklch(0.14 0.02 265);            /* #0a0a0f-ish */
+  --foreground: oklch(0.97 0.01 250);
+  --card: oklch(0.18 0.025 265);
+  --card-foreground: oklch(0.97 0.01 250);
+  --popover: oklch(0.2 0.025 265);
+  --popover-foreground: oklch(0.97 0.01 250);
+  --primary: oklch(0.66 0.21 255);               /* electric blue */
+  --primary-foreground: oklch(0.14 0.02 265);
+  --secondary: oklch(0.24 0.03 265);
+  --secondary-foreground: oklch(0.97 0.01 250);
+  --muted: oklch(0.22 0.025 265);
+  --muted-foreground: oklch(0.68 0.03 260);
+  --accent: oklch(0.3 0.05 265);
+  --accent-foreground: oklch(0.97 0.01 250);
+  --destructive: oklch(0.62 0.24 27);
+  --destructive-foreground: oklch(0.98 0.01 250);
+  --border: oklch(0.28 0.03 265);
+  --input: oklch(0.28 0.03 265);
+  --ring: oklch(0.66 0.21 255);
+
+  --grid: oklch(1 0 0 / 6%);
+
+  --success: oklch(0.72 0.18 150);
+  --success-foreground: oklch(0.14 0.02 265);
+  --warn: oklch(0.78 0.17 70);
+  --warn-foreground: oklch(0.14 0.02 265);
+  --danger: oklch(0.66 0.24 27);
+  --danger-foreground: oklch(0.98 0.01 250);
+
+  --chart-1: oklch(0.66 0.21 255);
+  --chart-2: oklch(0.7 0.18 180);
+  --chart-3: oklch(0.78 0.17 70);
+  --chart-4: oklch(0.66 0.24 27);
+  --chart-5: oklch(0.72 0.18 150);
+
+  --sidebar: oklch(0.16 0.02 265);
+  --sidebar-foreground: oklch(0.97 0.01 250);
+  --sidebar-primary: oklch(0.66 0.21 255);
+  --sidebar-primary-foreground: oklch(0.14 0.02 265);
+  --sidebar-accent: oklch(0.24 0.03 265);
+  --sidebar-accent-foreground: oklch(0.97 0.01 250);
+  --sidebar-border: oklch(0.28 0.03 265);
+  --sidebar-ring: oklch(0.66 0.21 255);
 }
 
 .dark {
-  --background: oklch(0.129 0.042 264.695);
-  --foreground: oklch(0.984 0.003 247.858);
-  --card: oklch(0.208 0.042 265.755);
-  --card-foreground: oklch(0.984 0.003 247.858);
-  --popover: oklch(0.208 0.042 265.755);
-  --popover-foreground: oklch(0.984 0.003 247.858);
-  --primary: oklch(0.929 0.013 255.508);
-  --primary-foreground: oklch(0.208 0.042 265.755);
-  --secondary: oklch(0.279 0.041 260.031);
-  --secondary-foreground: oklch(0.984 0.003 247.858);
-  --muted: oklch(0.279 0.041 260.031);
-  --muted-foreground: oklch(0.704 0.04 256.788);
-  --accent: oklch(0.279 0.041 260.031);
-  --accent-foreground: oklch(0.984 0.003 247.858);
-  --destructive: oklch(0.704 0.191 22.216);
-  --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.551 0.027 264.364);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.208 0.042 265.755);
-  --sidebar-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-accent: oklch(0.279 0.041 260.031);
-  --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.551 0.027 264.364);
+  /* Same as :root — the app is always dark mission-control. */
+  color-scheme: dark;
 }
 
 @layer base {
   * {
     border-color: var(--color-border);
   }
-
-  body {
+  html, body, #root {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    min-height: 100%;
   }
+  body {
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 48px 48px;
+    background-position: -1px -1px;
+  }
+}
+
+@layer utilities {
+  .font-mono-tabular {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.01em;
+  }
+  .text-cost-low { color: var(--warn); }
+  .text-cost-mid { color: var(--warn); }
+  .text-cost-high { color: var(--danger); }
+  .glow-primary {
+    box-shadow: 0 0 0 1px color-mix(in oklab, var(--primary) 35%, transparent),
+      0 8px 30px -10px color-mix(in oklab, var(--primary) 50%, transparent);
+  }
+  @keyframes materialize {
+    0% { opacity: 0; transform: translateY(6px) scale(0.98); filter: blur(4px); }
+    100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+  }
+  .animate-materialize { animation: materialize 0.5s ease-out both; }
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+  .pulse-dot { animation: pulse-dot 1.4s ease-in-out infinite; }
 }
