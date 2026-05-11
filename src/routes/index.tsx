@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
+import { Fragment, useMemo, useState } from "react";
 import { useGhostProcesses, useSettings, useInvalidateGhost } from "@/lib/hooks";
 import { setHourlyRate, updateGhostProcess, seedDemoData } from "@/lib/seed.functions";
 import { useServerFn } from "@tanstack/react-start";
@@ -538,10 +538,8 @@ function Heatmap({
           </div>
         ))}
         {teams.map((t) => (
-          <>
-            <div key={t} className="text-xs font-medium p-2 flex items-center">
-              {t}
-            </div>
+          <Fragment key={t}>
+            <div className="text-xs font-medium p-2 flex items-center">{t}</div>
             {CATEGORIES.map((c) => {
               const v = heatmap.map[t]?.[c] ?? 0;
               const intensity = heatmap.max > 0 ? v / heatmap.max : 0;
@@ -560,7 +558,7 @@ function Heatmap({
                 </div>
               );
             })}
-          </>
+          </Fragment>
         ))}
       </div>
     </div>
