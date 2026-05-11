@@ -79,7 +79,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         content:
           "GhostOps detects undocumented manual processes draining your team and quantifies the cost.",
       },
-      { property: "og:title", content: "GhostOps" },
+      { property: "og:title", content: "GhostOps — Make invisible manual work visible" },
       {
         property: "og:description",
         content:
@@ -87,6 +87,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
+      { name: "twitter:title", content: "GhostOps — Make invisible manual work visible" },
+      { name: "description", content: "GhostOps reveals and quantifies hidden manual work, generating an automation roadmap." },
+      { property: "og:description", content: "GhostOps reveals and quantifies hidden manual work, generating an automation roadmap." },
+      { name: "twitter:description", content: "GhostOps reveals and quantifies hidden manual work, generating an automation roadmap." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/51960ba1-caed-4a92-9fa8-e156e1f2c739/id-preview-b18cfa72--3eec417f-2ca7-4417-8916-810131fe769c.lovable.app-1778474784319.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/51960ba1-caed-4a92-9fa8-e156e1f2c739/id-preview-b18cfa72--3eec417f-2ca7-4417-8916-810131fe769c.lovable.app-1778474784319.png" },
     ],
     links: [
       {
