@@ -14,7 +14,179 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      ghost_processes: {
+        Row: {
+          annual_cost: number
+          category: Database["public"]["Enums"]["ghost_category"]
+          confidence: string
+          created_at: string
+          description: string | null
+          difficulty: number
+          evidence: Json
+          hours_per_occurrence: number
+          id: string
+          implementation_days: number | null
+          monthly_cost: number
+          monthly_hours: number | null
+          name: string
+          occurrences_per_month: number
+          owner: string | null
+          people_involved: number
+          recommendation: string | null
+          recommended_tools: string | null
+          signal_ids: string[]
+          source: Database["public"]["Enums"]["ghost_source"]
+          status: Database["public"]["Enums"]["ghost_status"]
+          team: string | null
+          updated_at: string
+        }
+        Insert: {
+          annual_cost?: number
+          category?: Database["public"]["Enums"]["ghost_category"]
+          confidence?: string
+          created_at?: string
+          description?: string | null
+          difficulty?: number
+          evidence?: Json
+          hours_per_occurrence?: number
+          id?: string
+          implementation_days?: number | null
+          monthly_cost?: number
+          monthly_hours?: number | null
+          name: string
+          occurrences_per_month?: number
+          owner?: string | null
+          people_involved?: number
+          recommendation?: string | null
+          recommended_tools?: string | null
+          signal_ids?: string[]
+          source?: Database["public"]["Enums"]["ghost_source"]
+          status?: Database["public"]["Enums"]["ghost_status"]
+          team?: string | null
+          updated_at?: string
+        }
+        Update: {
+          annual_cost?: number
+          category?: Database["public"]["Enums"]["ghost_category"]
+          confidence?: string
+          created_at?: string
+          description?: string | null
+          difficulty?: number
+          evidence?: Json
+          hours_per_occurrence?: number
+          id?: string
+          implementation_days?: number | null
+          monthly_cost?: number
+          monthly_hours?: number | null
+          name?: string
+          occurrences_per_month?: number
+          owner?: string | null
+          people_involved?: number
+          recommendation?: string | null
+          recommended_tools?: string | null
+          signal_ids?: string[]
+          source?: Database["public"]["Enums"]["ghost_source"]
+          status?: Database["public"]["Enums"]["ghost_status"]
+          team?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      settings: {
+        Row: {
+          blended_hourly_rate: number
+          id: number
+          updated_at: string
+        }
+        Insert: {
+          blended_hourly_rate?: number
+          id?: number
+          updated_at?: string
+        }
+        Update: {
+          blended_hourly_rate?: number
+          id?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      signals: {
+        Row: {
+          fetched_at: string
+          id: string
+          metadata: Json
+          signal_type: string
+          source: Database["public"]["Enums"]["signal_source"]
+          title: string | null
+        }
+        Insert: {
+          fetched_at?: string
+          id?: string
+          metadata?: Json
+          signal_type: string
+          source: Database["public"]["Enums"]["signal_source"]
+          title?: string | null
+        }
+        Update: {
+          fetched_at?: string
+          id?: string
+          metadata?: Json
+          signal_type?: string
+          source?: Database["public"]["Enums"]["signal_source"]
+          title?: string | null
+        }
+        Relationships: []
+      }
+      submissions: {
+        Row: {
+          anonymous: boolean
+          created_at: string
+          frequency: string
+          ghost_process_id: string | null
+          hours: number
+          id: string
+          missing_tool: string | null
+          people: number
+          reporter_name: string | null
+          task_name: string
+          team: string | null
+        }
+        Insert: {
+          anonymous?: boolean
+          created_at?: string
+          frequency: string
+          ghost_process_id?: string | null
+          hours: number
+          id?: string
+          missing_tool?: string | null
+          people?: number
+          reporter_name?: string | null
+          task_name: string
+          team?: string | null
+        }
+        Update: {
+          anonymous?: boolean
+          created_at?: string
+          frequency?: string
+          ghost_process_id?: string | null
+          hours?: number
+          id?: string
+          missing_tool?: string | null
+          people?: number
+          reporter_name?: string | null
+          task_name?: string
+          team?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "submissions_ghost_process_id_fkey"
+            columns: ["ghost_process_id"]
+            isOneToOne: false
+            referencedRelation: "ghost_processes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
@@ -23,7 +195,21 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      ghost_category:
+        | "Data Wrangling"
+        | "Manual Reporting"
+        | "Improvised Approval Workflow"
+        | "Knowledge Retrieval"
+        | "System Sync"
+        | "Other"
+      ghost_source: "detected" | "reported"
+      ghost_status:
+        | "detected"
+        | "acknowledged"
+        | "in_progress"
+        | "fixed"
+        | "false_positive"
+      signal_source: "calendar" | "gmail" | "drive" | "slack" | "manual"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +336,24 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      ghost_category: [
+        "Data Wrangling",
+        "Manual Reporting",
+        "Improvised Approval Workflow",
+        "Knowledge Retrieval",
+        "System Sync",
+        "Other",
+      ],
+      ghost_source: ["detected", "reported"],
+      ghost_status: [
+        "detected",
+        "acknowledged",
+        "in_progress",
+        "fixed",
+        "false_positive",
+      ],
+      signal_source: ["calendar", "gmail", "drive", "slack", "manual"],
+    },
   },
 } as const
