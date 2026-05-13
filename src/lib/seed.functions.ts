@@ -278,15 +278,9 @@ const SEED_SIGNALS = [
 ];
 
 export const seedDemoData = createServerFn({ method: "POST" })
-  .inputValidator((d: { reset?: boolean } | undefined) => d ?? {})
-  .handler(async ({ data }) => {
+  .inputValidator(() => ({}))
+  .handler(async () => {
     const sb = supabaseAdmin;
-
-    if (data.reset) {
-      await sb.from("submissions").delete().gte("created_at", "1900-01-01");
-      await sb.from("ghost_processes").delete().gte("created_at", "1900-01-01");
-      await sb.from("signals").delete().gte("fetched_at", "1900-01-01");
-    }
 
     // Skip if data already present
     const { count } = await sb
